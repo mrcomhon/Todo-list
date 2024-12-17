@@ -1,0 +1,29 @@
+.container {
+    max-width: calc(var(--container-width) + var(--container-padding-x) * 2);
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem; /* Убедитесь, что есть отступы */
+  overflow: hidden; /* Прячем содержимое, выходящее за пределы */
+  box-sizing: border-box; /* Учитываем отступы в расчётах */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10rem;
+  row-gap: 2rem;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.hidden-mobile {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+.visible-mobile {
+  @include mobile-above {
+    display: none !important;
+  }
+}

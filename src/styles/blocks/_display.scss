@@ -1,0 +1,39 @@
+.todo {
+    width: 30rem;
+    height: 60vh;
+    background-color: var(--color-light);
+    padding: 1rem;
+
+    &__header {
+        display: flex;
+        flex-wrap: wrap; /* Если элементы не помещаются, они будут переноситься */
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        row-gap: 1.25rem;
+        padding-bottom: 1rem;
+    }
+        
+        &__name {
+            color: var(--color-dark);
+            display: flex;
+            column-gap: 0.75rem;
+            align-items: center;
+        }
+        
+        &__window {
+            position: relative;
+
+        }
+    
+        &__display {
+            height: var(--input-height);
+            width: var(--input-width);
+            border-radius: var(--border-radius);
+        }
+
+        &__display:focus {
+            border-color: rgb(0, 128, 255);
+            transition-duration: var(--transition-duration);
+        }
+}

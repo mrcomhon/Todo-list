@@ -1,3 +1,9 @@
-@import "normalize", "fonts" , "mixins" , "media" , "variables" , "utils" , "globals";
+@import "normalize";
+@import "fonts";
+@import "mixins";
+@import "media";
+@import "variables";
+@import "utils";
+@import "globals";
 
-@import "blocks/button", "blocks/burger-button", "blocks/radio", "blocks/radios", "blocks/cross-button", "blocks/button-add", "blocks/mobile-overlay", "blocks/filter";
+@import "blocks/button", "blocks/burger-button", "blocks/radio", "blocks/radios", "blocks/cross-button", "blocks/button-add", "blocks/mobile-overlay", "blocks/filter", "blocks/display", "blocks/toggle-switch";
