@@ -1,12 +1,24 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
+const { watchFile } = require("fs");
 
 module.exports = {
   entry: "./src/scripts/scripts.js", // Основной JS-файл
   output: {
     filename: "bundle.js", // Имя собранного файла
     path: path.resolve(__dirname, "dist"), // Папка для сборки
+    clean: true,
   },
   mode: "development", // Режим разработки
+  devtool: "inline-source-map",
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "index.html",
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   module: {
     rules: [
       {
@@ -19,6 +31,26 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
     ],
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+    compress: true,
+    port: 5500,
+    open: true,
+    hot: true,
+    liveReload: true,
+    watchFiles: {
+      paths: ["./src/index.html"],
+      options: {
+        usePolling: true, // Включает polling для отслеживания изменений (если ОС не поддерживает нативное отслеживание)
+      },
+    },
   },
 };

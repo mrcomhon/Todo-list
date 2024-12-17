@@ -3,6 +3,7 @@
     height: 60vh;
     background-color: var(--color-light);
     padding: 1rem;
+    border-radius: 1rem;
 
     &__header {
         display: flex;
@@ -36,4 +37,26 @@
             border-color: rgb(0, 128, 255);
             transition-duration: var(--transition-duration);
         }
-}
+
+        &__display.is-dark-theme {
+            background-color: var(--color-dark);
+            border-color: var(--color-light);
+            caret-color: var(--color-light);
+            color: var(--color-light);
+        }
+
+        &__display.is-dark-theme:focus {
+            border-color: rgb(0, 128, 255);
+
+        }
+
+        &__title.is-dark-theme {
+            color: white;
+        }
+    }
+    
+    .todo.is-dark-theme {
+        background-color: var(--color-dark);
+        color: var(--color-light);
+        
+    }

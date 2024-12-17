@@ -341,6 +341,7 @@ h4, .h4 {
   height: 60vh;
   background-color: var(--color-light);
   padding: 1rem;
+  border-radius: 1rem;
 }
 .todo__header {
   display: flex;
@@ -369,6 +370,23 @@ h4, .h4 {
 .todo__display:focus {
   border-color: rgb(0, 128, 255);
   transition-duration: var(--transition-duration);
+}
+.todo__display.is-dark-theme {
+  background-color: var(--color-dark);
+  border-color: var(--color-light);
+  caret-color: var(--color-light);
+  color: var(--color-light);
+}
+.todo__display.is-dark-theme:focus {
+  border-color: rgb(0, 128, 255);
+}
+.todo__title.is-dark-theme {
+  color: white;
+}
+
+.todo.is-dark-theme {
+  background-color: var(--color-dark);
+  color: var(--color-light);
 }
 
 .switch {
