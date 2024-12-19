@@ -194,10 +194,6 @@ svg * {
   }
 }
 
-* {
-  outline: 1px solid red; /* Показывает границы всех элементов */
-}
-
 html, body {
   margin: 0;
   padding: 0;
@@ -337,11 +333,36 @@ h4, .h4 {
 }
 
 .todo {
+  position: relative;
   width: 30rem;
   height: 60vh;
   background-color: var(--color-light);
   padding: 1rem;
   border-radius: 1rem;
+}
+.todo__scrollbar {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-green-reverse) var(--color-green);
+  left: 0;
+  top: 0;
+  height: 100%;
+  max-width: 100%;
+  scroll-behavior: smooth;
+}
+.todo__scrollbar.is-dark-theme {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-green) var(--color-green-reverse);
+  left: 0;
+  top: 0;
+  height: 100%;
+  max-width: 100%;
+  scroll-behavior: smooth;
 }
 .todo__header {
   display: flex;
@@ -350,7 +371,8 @@ h4, .h4 {
   justify-content: space-between;
   align-items: center;
   row-gap: 1.25rem;
-  padding-bottom: 1rem;
+  padding-block: 1rem;
+  width: 30rem;
 }
 .todo__name {
   color: var(--color-dark);
@@ -383,9 +405,39 @@ h4, .h4 {
 .todo__title.is-dark-theme {
   color: white;
 }
+.todo__body {
+  width: 30rem;
+}
+.todo__list {
+  overflow-x: auto;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  padding: 0.5rem;
+}
+.todo__item {
+  color: var(--color-dark);
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  padding: 0.5rem;
+  border-bottom: 0.125rem solid var(--color-green-reverse);
+}
+.todo__item.is-dark-theme {
+  color: var(--color-light);
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  padding: 0.5rem;
+  border-bottom: 0.125rem solid var(--color-green);
+}
 
 .todo.is-dark-theme {
   background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+.icon.is-dark-theme {
   color: var(--color-light);
 }
 

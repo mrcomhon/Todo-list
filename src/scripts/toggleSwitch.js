@@ -4,6 +4,9 @@ export class ThemeSwitcher {
     switchThemeTodo: "#todo",
     switchThemeInput: "#todoDisplay",
     switchThemeTitle: "#todoTitle",
+    switchThemeIcon: "#todoIcon",
+    switchThemeScrollbar: ".todo__scrollbar",
+    switchThemeItems: ".todo__item",
   };
 
   themes = {
@@ -30,6 +33,15 @@ export class ThemeSwitcher {
     this.switchThemeTitleElement = document.querySelector(
       this.selectors.switchThemeTitle
     );
+    this.switchThemeIconElement = document.querySelector(
+      this.selectors.switchThemeIcon
+    );
+    this.switchThemeScrollbarElement = document.querySelector(
+      this.selectors.switchThemeScrollbar
+    );
+    this.switchThemeItemElements = document.querySelectorAll(
+      this.selectors.switchThemeItems
+    );
     this.setInitialTheme();
     this.bindEvents();
   }
@@ -50,41 +62,66 @@ export class ThemeSwitcher {
       this.stateClasses.isDarkTheme,
       isDark
     );
-      
-      this.switchThemeInputElement.classList.toggle(
-          this.stateClasses.isDarkTheme,
-          isDark
-      )
 
-       this.switchThemeTitleElement.classList.toggle(
-         this.stateClasses.isDarkTheme,
-         isDark
-       );
+    this.switchThemeInputElement.classList.toggle(
+      this.stateClasses.isDarkTheme,
+      isDark
+    );
+
+    this.switchThemeTitleElement.classList.toggle(
+      this.stateClasses.isDarkTheme,
+      isDark
+    );
+
+    this.switchThemeIconElement.classList.toggle(
+      this.stateClasses.isDarkTheme,
+      isDark
+    );
+
+    this.switchThemeScrollbarElement.classList.toggle(
+      this.stateClasses.isDarkTheme,
+      isDark
+    );
+
+    document
+      .querySelectorAll(this.selectors.switchThemeItems)
+      .forEach((item) => item.classList.toggle(this.stateClasses.isDarkTheme));
 
     this.switchThemeButtonElement.checked = isDark;
   }
 
+  applyThemeToNewItem(item) {
+    const isDark = this.isDarkThemeCached;
+    item.classList.toggle(this.stateClasses.isDarkTheme, isDark);
+  }
+
   onClick = () => {
-      const isDark = this.switchThemeButtonElement.checked;
+    const isDark = this.switchThemeButtonElement.checked;
 
     localStorage.setItem(
       this.storageKey,
       isDark ? this.themes.dark : this.themes.light
     );
 
-      
-      document.body.classList.toggle(this.stateClasses.isDarkTheme);
-      this.switchThemeTodoElement.classList.toggle(this.stateClasses.isDarkTheme);
-     this.switchThemeInputElement.classList.toggle(
-        this.stateClasses.isDarkTheme
-      );
-      this.switchThemeTitleElement.classList.toggle(
-        this.stateClasses.isDarkTheme
-      );
+    document.body.classList.toggle(this.stateClasses.isDarkTheme);
+    this.switchThemeTodoElement.classList.toggle(this.stateClasses.isDarkTheme);
+    this.switchThemeInputElement.classList.toggle(
+      this.stateClasses.isDarkTheme
+    );
+    this.switchThemeTitleElement.classList.toggle(
+      this.stateClasses.isDarkTheme
+    );
 
+    this.switchThemeIconElement.classList.toggle(this.stateClasses.isDarkTheme);
+    this.switchThemeScrollbarElement.classList.toggle(
+      this.stateClasses.isDarkTheme
+    );
+    document
+      .querySelectorAll(this.selectors.switchThemeItems)
+      .forEach((item) => item.classList.toggle(this.stateClasses.isDarkTheme));
   };
 
   bindEvents() {
-      this.switchThemeButtonElement.addEventListener("change", this.onClick);
+    this.switchThemeButtonElement.addEventListener("change", this.onClick);
   }
 }

@@ -1,5 +1,8 @@
 import "../css/styles.css";
-import { ThemeSwitcher } from '../scripts/toggleSwitch';
+import {taskManager} from "../scripts/taskManager";
+import { ThemeSwitcher } from "../scripts/toggleSwitch";
 
-new ThemeSwitcher() 
-
+document.addEventListener("DOMContentLoaded", () => {
+    const themeSwicher = new ThemeSwitcher();
+        taskManager.init(themeSwicher);
+})
