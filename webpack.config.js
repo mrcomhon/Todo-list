@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const { watchFile } = require("fs");
+const { type } = require('os');
 
 module.exports = {
   entry: "./src/scripts/scripts.js", // Основной JS-файл
@@ -35,6 +36,17 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
       },
+      {
+        test: /\.svg$/, // Для файлов .svg
+        use: "svg-inline-loader", // Применяем svg-inline-loader
+      },
+      // {
+      //   test: /\.svg$/,
+      //   type: "asset/resource",
+      //   generator: {
+      //     filename: "icons/[name][ext]",
+      //   },
+      // },
     ],
   },
   devServer: {

@@ -7,6 +7,7 @@ export class ThemeSwitcher {
     switchThemeIcon: "#todoIcon",
     switchThemeScrollbar: ".todo__scrollbar",
     switchThemeItems: ".todo__item",
+    switchThemeEdit: ".todo__edit",
   };
 
   themes = {
@@ -42,6 +43,10 @@ export class ThemeSwitcher {
     this.switchThemeItemElements = document.querySelectorAll(
       this.selectors.switchThemeItems
     );
+    this.switchThemeEditElements = document.querySelectorAll(
+      this.selectors.switchThemeEdit
+    );
+
     this.setInitialTheme();
     this.bindEvents();
   }
@@ -87,12 +92,21 @@ export class ThemeSwitcher {
       .querySelectorAll(this.selectors.switchThemeItems)
       .forEach((item) => item.classList.toggle(this.stateClasses.isDarkTheme));
 
+    document
+      .querySelectorAll(this.selectors.switchThemeEdit)
+      .forEach((item) => item.classList.toggle(this.stateClasses.isDarkTheme));
+
     this.switchThemeButtonElement.checked = isDark;
   }
 
   applyThemeToNewItem(item) {
     const isDark = this.isDarkThemeCached;
     item.classList.toggle(this.stateClasses.isDarkTheme, isDark);
+  }
+
+  applyThemeToNewEdit(edit) {
+    const isDark = this.isDarkThemeCached;
+    edit.classList.toggle(this.stateClasses.isDarkTheme, isDark);
   }
 
   onClick = () => {
@@ -116,8 +130,13 @@ export class ThemeSwitcher {
     this.switchThemeScrollbarElement.classList.toggle(
       this.stateClasses.isDarkTheme
     );
+
     document
       .querySelectorAll(this.selectors.switchThemeItems)
+      .forEach((item) => item.classList.toggle(this.stateClasses.isDarkTheme));
+
+    document
+      .querySelectorAll(this.selectors.switchThemeEdit)
       .forEach((item) => item.classList.toggle(this.stateClasses.isDarkTheme));
   };
 

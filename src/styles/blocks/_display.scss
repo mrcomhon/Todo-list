@@ -87,6 +87,8 @@
   }
 
   &__list {
+    display: flex;
+    flex-direction: column;
     overflow-x: auto;
     word-wrap: break-word;
     word-break: break-word;
@@ -95,6 +97,10 @@
   }
 
   &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 1rem;
     color: var(--color-dark);
     word-wrap: break-word;
     word-break: break-word;
@@ -111,7 +117,59 @@
     padding: 0.5rem;
     border-bottom: 0.125rem solid var(--color-green);
   }
+
+  &__delete {
+    // background-image: url(/src/icons/trash.svg);
+    padding-block: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: red;
+    width: 2rem;
+  height: 100%;
+
+  @include hover {
+      background-color:darkred;
+  }
 }
+
+  &__edit {
+        padding-block: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    // color: var(--color-dark);
+    width: 2rem;
+  height: 100%;
+
+  @include hover {
+      // background-color:darkred;
+      outline: solid var(--color-dark);
+  }
+  }
+
+  &__edit.is-dark-theme {
+        padding-block: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-light);
+    width: 2rem;
+  height: 100%;
+
+  @include hover {
+      // background-color:darkred;
+      outline: solid var(--color-light);
+  }
+  }
+ 
+  &__gap {
+display: flex;
+column-gap: 1rem;
+  }
+
+  }
+
 
 .todo.is-dark-theme {
   background-color: var(--color-dark);

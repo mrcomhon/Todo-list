@@ -409,6 +409,8 @@ h4, .h4 {
   width: 30rem;
 }
 .todo__list {
+  display: flex;
+  flex-direction: column;
   overflow-x: auto;
   word-wrap: break-word;
   word-break: break-word;
@@ -416,6 +418,11 @@ h4, .h4 {
   padding: 0.5rem;
 }
 .todo__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
   color: var(--color-dark);
   word-wrap: break-word;
   word-break: break-word;
@@ -430,6 +437,67 @@ h4, .h4 {
   white-space: normal;
   padding: 0.5rem;
   border-bottom: 0.125rem solid var(--color-green);
+}
+.todo__delete {
+  padding-block: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+  width: 2rem;
+  height: 100%;
+}
+@media (hover: hover) {
+  .todo__delete:hover {
+    background-color: darkred;
+  }
+}
+@media (hover: none) {
+  .todo__delete:active {
+    background-color: darkred;
+  }
+}
+.todo__edit {
+  padding-block: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 2rem;
+  height: 100%;
+}
+@media (hover: hover) {
+  .todo__edit:hover {
+    outline: solid var(--color-dark);
+  }
+}
+@media (hover: none) {
+  .todo__edit:active {
+    outline: solid var(--color-dark);
+  }
+}
+.todo__edit.is-dark-theme {
+  padding-block: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-light);
+  width: 2rem;
+  height: 100%;
+}
+@media (hover: hover) {
+  .todo__edit.is-dark-theme:hover {
+    outline: solid var(--color-light);
+  }
+}
+@media (hover: none) {
+  .todo__edit.is-dark-theme:active {
+    outline: solid var(--color-light);
+  }
+}
+.todo__gap {
+  display: flex;
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
 }
 
 .todo.is-dark-theme {
