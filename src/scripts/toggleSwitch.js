@@ -8,6 +8,7 @@ export class ThemeSwitcher {
     switchThemeScrollbar: ".todo__scrollbar",
     switchThemeItems: ".todo__item",
     switchThemeEdit: ".todo__edit",
+    switchThemeDeleteAll: ".todo__delete-all",
   };
 
   themes = {
@@ -40,6 +41,9 @@ export class ThemeSwitcher {
     this.switchThemeScrollbarElement = document.querySelector(
       this.selectors.switchThemeScrollbar
     );
+    this.switchThemeDeleteAllElement = document.querySelector(
+      this.selectors.switchThemeDeleteAll
+    );
     this.switchThemeItemElements = document.querySelectorAll(
       this.selectors.switchThemeItems
     );
@@ -63,30 +67,48 @@ export class ThemeSwitcher {
       isDark
       //   this.isDarkThemeCached
     );
-    this.switchThemeTodoElement.classList.toggle(
-      this.stateClasses.isDarkTheme,
-      isDark
-    );
 
-    this.switchThemeInputElement.classList.toggle(
-      this.stateClasses.isDarkTheme,
-      isDark
-    );
+    if (this.switchThemeTodoElement) {
+      this.switchThemeTodoElement.classList.toggle(
+        this.stateClasses.isDarkTheme,
+        isDark
+      );
+    }
 
-    this.switchThemeTitleElement.classList.toggle(
-      this.stateClasses.isDarkTheme,
-      isDark
-    );
+    if (this.switchThemeInputElement) {
+      this.switchThemeInputElement.classList.toggle(
+        this.stateClasses.isDarkTheme,
+        isDark
+      );
+    }
 
-    this.switchThemeIconElement.classList.toggle(
-      this.stateClasses.isDarkTheme,
-      isDark
-    );
+    if (this.switchThemeTitleElement) {
+      this.switchThemeTitleElement.classList.toggle(
+        this.stateClasses.isDarkTheme,
+        isDark
+      );
+    }
 
-    this.switchThemeScrollbarElement.classList.toggle(
-      this.stateClasses.isDarkTheme,
-      isDark
-    );
+    if (this.switchThemeIconElement) {
+      this.switchThemeIconElement.classList.toggle(
+        this.stateClasses.isDarkTheme,
+        isDark
+      );
+    }
+
+    if (this.switchThemeScrollbarElement) {
+      this.switchThemeScrollbarElement.classList.toggle(
+        this.stateClasses.isDarkTheme,
+        isDark
+      );
+    }
+
+    if (this.switchThemeDeleteAllElement) {
+      this.switchThemeDeleteAllElement.classList.toggle(
+        this.stateClasses.isDarkTheme,
+        isDark
+      );
+    }
 
     document
       .querySelectorAll(this.selectors.switchThemeItems)
@@ -130,6 +152,14 @@ export class ThemeSwitcher {
     this.switchThemeScrollbarElement.classList.toggle(
       this.stateClasses.isDarkTheme
     );
+    
+
+    const clearAllButton = document.querySelector(
+      this.selectors.switchThemeDeleteAll
+    );
+    if (clearAllButton) {
+      clearAllButton.classList.toggle(this.stateClasses.isDarkTheme, isDark);
+    }
 
     document
       .querySelectorAll(this.selectors.switchThemeItems)

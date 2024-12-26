@@ -133,6 +133,38 @@
   }
 }
 
+&__delete-all {
+  margin-left: 0.25rem;
+  position: absolute;
+        padding-block: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-dark);
+    width: 2rem;
+  height: 100%;
+
+  @include hover {
+      // background-color:darkred;
+      outline: solid var(--color-dark);
+  }
+  }
+
+  &__delete-all.is-dark-theme {
+        padding-block: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-light);
+    width: 2rem;
+  height: 100%;
+
+  @include hover {
+      // background-color:darkred;
+      outline: solid var(--color-light);
+  }
+  }
+
   &__edit {
         padding-block: 0.5rem;
     background: none;

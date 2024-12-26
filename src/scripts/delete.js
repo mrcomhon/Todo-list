@@ -18,8 +18,6 @@
 
 import trashIcon from "../icons/trash.svg";
 
-console.log(trashIcon)
-
 export function createDeleteButton() {
   const deleteButton = document.createElement("button");
     deleteButton.classList.add("todo__delete");

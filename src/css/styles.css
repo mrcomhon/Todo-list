@@ -457,6 +457,46 @@ h4, .h4 {
     background-color: darkred;
   }
 }
+.todo__delete-all {
+  margin-left: 0.25rem;
+  position: absolute;
+  padding-block: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-dark);
+  width: 2rem;
+  height: 100%;
+}
+@media (hover: hover) {
+  .todo__delete-all:hover {
+    outline: solid var(--color-dark);
+  }
+}
+@media (hover: none) {
+  .todo__delete-all:active {
+    outline: solid var(--color-dark);
+  }
+}
+.todo__delete-all.is-dark-theme {
+  padding-block: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-light);
+  width: 2rem;
+  height: 100%;
+}
+@media (hover: hover) {
+  .todo__delete-all.is-dark-theme:hover {
+    outline: solid var(--color-light);
+  }
+}
+@media (hover: none) {
+  .todo__delete-all.is-dark-theme:active {
+    outline: solid var(--color-light);
+  }
+}
 .todo__edit {
   padding-block: 0.5rem;
   background: none;

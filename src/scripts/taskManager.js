@@ -1,11 +1,32 @@
 import { createEditButton } from "./edit.js";
 import { createDeleteButton } from "./delete.js";
+import { createDeleteButtonAll } from './clearAll.js';
+import { ThemeSwitcher } from './toggleSwitch.js';
 
 export const taskManager = {
   init(themeSwitcher) {
     const buttonAdd = document.querySelector("#buttonAdd");
     const inputField = document.querySelector("#todoDisplay");
     const todoList = document.querySelector(".todo__list");
+    const todoWindow = document.querySelector(".todo__window");
+    
+    const deleteButtonAll = createDeleteButtonAll(ThemeSwitcher);
+
+    const updateDeleteButtonAllVisibility = () => {
+        if (todoList.children.length > 0) {
+      if    (!todoWindow.contains(deleteButtonAll))
+          todoWindow.append(deleteButtonAll)
+        } else {
+          if(todoWindow.contains(deleteButtonAll));
+          todoWindow.removeChild(deleteButtonAll);
+        }
+    }
+
+    deleteButtonAll.addEventListener("click", () => {
+      todoList.innerHTML = "";
+      updateDeleteButtonAllVisibility();
+    });
+  
 
     const addTask = (taskText) => {
       const newTask = document.createElement("li");
@@ -20,6 +41,8 @@ export const taskManager = {
 
       const editButton = createEditButton();
       const deleteButton = createDeleteButton();
+
+
 
       editButton.addEventListener("click", () => {
         const inputEdit = document.createElement("input");
@@ -56,8 +79,11 @@ export const taskManager = {
 
       deleteButton.addEventListener("click", () => {
         newTask.remove();
+      updateDeleteButtonAllVisibility();
+
       });
 
+      themeSwitcher.applyThemeToNewItem(deleteButtonAll)
       themeSwitcher.applyThemeToNewEdit(editButton);
       themeSwitcher.applyThemeToNewItem(newTask);
 
@@ -67,6 +93,8 @@ export const taskManager = {
       buttonGap.appendChild(deleteButton);
 
       todoList.append(newTask);
+      updateDeleteButtonAllVisibility();
+
     };
 
     buttonAdd.addEventListener("click", () => {
@@ -78,6 +106,7 @@ export const taskManager = {
       }
       addTask(inputValue);
       inputField.value = "";
+
     });
 
     inputField.addEventListener("keypress", (event) => {
@@ -92,5 +121,7 @@ export const taskManager = {
         inputField.value = "";
       }
     });
+      updateDeleteButtonAllVisibility();
+
   },
 };
