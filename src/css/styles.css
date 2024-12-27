@@ -539,6 +539,12 @@ h4, .h4 {
   -moz-column-gap: 1rem;
        column-gap: 1rem;
 }
+.todo__message--success {
+  color: var(--color-accent);
+}
+.todo__message--fail {
+  color: red;
+}
 
 .todo.is-dark-theme {
   background-color: var(--color-dark);

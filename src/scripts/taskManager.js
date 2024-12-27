@@ -1,7 +1,9 @@
 import { createEditButton } from "./edit.js";
 import { createDeleteButton } from "./delete.js";
-import { createDeleteButtonAll } from './clearAll.js';
-import { ThemeSwitcher } from './toggleSwitch.js';
+import { createDeleteButtonAll } from "./clearAll.js";
+import { ThemeSwitcher } from "./toggleSwitch.js";
+import { successMessage } from "./successMessage.js";
+const { showMessage } = successMessage();
 
 export const taskManager = {
   init(themeSwitcher) {
@@ -9,24 +11,23 @@ export const taskManager = {
     const inputField = document.querySelector("#todoDisplay");
     const todoList = document.querySelector(".todo__list");
     const todoWindow = document.querySelector(".todo__window");
-    
+
     const deleteButtonAll = createDeleteButtonAll(ThemeSwitcher);
 
     const updateDeleteButtonAllVisibility = () => {
-        if (todoList.children.length > 0) {
-      if    (!todoWindow.contains(deleteButtonAll))
-          todoWindow.append(deleteButtonAll)
-        } else {
-          if(todoWindow.contains(deleteButtonAll));
-          todoWindow.removeChild(deleteButtonAll);
-        }
-    }
+      if (todoList.children.length > 0) {
+        if (!todoWindow.contains(deleteButtonAll))
+          todoWindow.append(deleteButtonAll);
+      } else {
+        if (todoWindow.contains(deleteButtonAll));
+        todoWindow.removeChild(deleteButtonAll);
+      }
+    };
 
     deleteButtonAll.addEventListener("click", () => {
       todoList.innerHTML = "";
       updateDeleteButtonAllVisibility();
     });
-  
 
     const addTask = (taskText) => {
       const newTask = document.createElement("li");
@@ -41,8 +42,6 @@ export const taskManager = {
 
       const editButton = createEditButton();
       const deleteButton = createDeleteButton();
-
-
 
       editButton.addEventListener("click", () => {
         const inputEdit = document.createElement("input");
@@ -79,11 +78,10 @@ export const taskManager = {
 
       deleteButton.addEventListener("click", () => {
         newTask.remove();
-      updateDeleteButtonAllVisibility();
-
+        updateDeleteButtonAllVisibility();
       });
 
-      themeSwitcher.applyThemeToNewItem(deleteButtonAll)
+      themeSwitcher.applyThemeToNewItem(deleteButtonAll);
       themeSwitcher.applyThemeToNewEdit(editButton);
       themeSwitcher.applyThemeToNewItem(newTask);
 
@@ -91,22 +89,26 @@ export const taskManager = {
       newTask.appendChild(buttonGap);
       buttonGap.appendChild(editButton);
       buttonGap.appendChild(deleteButton);
+      showMessage("success");
 
       todoList.append(newTask);
       updateDeleteButtonAllVisibility();
-
     };
 
     buttonAdd.addEventListener("click", () => {
       const inputValue = inputField.value.trim();
 
       if (inputValue === "") {
-        console.log("Введите текст задачи!");
+        showMessage("empty");
         return;
       }
-      addTask(inputValue);
-      inputField.value = "";
-
+      try {
+        addTask(inputValue);
+        inputField.value = "";
+      } catch (error) {
+        console.error("Ошибка при добавлении задачи:", error);
+        showMessage("fail");
+      }
     });
 
     inputField.addEventListener("keypress", (event) => {
@@ -114,14 +116,18 @@ export const taskManager = {
         const inputValue = inputField.value.trim();
 
         if (inputValue === "") {
-          alert("Введите текст задачи!");
+          showMessage("empty");
           return;
         }
-        addTask(inputValue);
-        inputField.value = "";
+        try {
+          addTask(inputValue);
+          inputField.value = "";
+        } catch (error) {
+          console.error("Ошибка при добавлении задачи:", error);
+          showMessage("fail");
+        }
       }
     });
-      updateDeleteButtonAllVisibility();
-
+    updateDeleteButtonAllVisibility();
   },
 };
