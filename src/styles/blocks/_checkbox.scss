@@ -1,0 +1,39 @@
+.todo__checkbox {
+  appearance: none; /* Скрывает стандартный вид */
+  -webkit-appearance: none; /* Для WebKit-браузеров */
+  -moz-appearance: none; /* Для Firefox */
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 0.125px solid #ccc;
+//   border-radius: 50%; /* Круглая форма */
+  background-color: #fff;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.todo__checkbox:checked {
+  border-color: #4caf50; /* Цвет рамки при выборе */
+  background-color: #4caf50; /* Цвет заполнения */
+}
+
+.todo__checkbox:checked::after {
+  content: "✔";
+  font-size: 1rem;
+  width: 0.625rem;
+  height: 0.625rem;
+//   background-color: #fff; /* Цвет внутреннего круга */
+//   border-radius: 50%;
+  position: absolute;
+  top: 25%;
+  left: 42%;
+  transform: translate(-50%, -50%);
+
+}
+
+.todo__checkbox:disabled {
+  background-color: #f5f5f5;
+  border-color: #ddd;
+  cursor: not-allowed;
+}

@@ -172,5 +172,14 @@ export class ThemeSwitcher {
 
   bindEvents() {
     this.switchThemeButtonElement.addEventListener("change", this.onClick);
+
+    document.querySelector('.slider').addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        const slider = document.querySelector('#switch');
+        slider.checked = !slider.checked;
+        slider.dispatchEvent(new Event('change'))
+      }
+    })
   }
+
 }

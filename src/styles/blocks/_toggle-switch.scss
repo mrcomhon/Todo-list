@@ -57,3 +57,8 @@
 .slider.round:before {
   border-radius: 50%;
 }
+
+.slider:focus {
+  outline: 0.125rem solid var(--color-light);
+  outline-offset: 0.125rem;
+}

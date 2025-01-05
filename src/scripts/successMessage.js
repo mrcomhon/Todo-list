@@ -28,7 +28,7 @@ export function successMessage() {
         
         setTimeout(() => {
             newMessage.remove()
-        }, 300000)
+        }, 3000)
     }
 
     return { showMessage };

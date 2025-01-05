@@ -16,8 +16,14 @@
         type="checkbox"
         class="switch__input"
         data-js-theme-switcher
+        tabindex="-1"
         />
-        <span class="slider round"></span>
+        <span 
+        class="slider round" 
+        tabindex="0"
+        role="button"
+        aria-label="Switch theme"
+        ></span>
       </label>
       <div class="todo" id="todo">
         <div class="todo__scrollbar">
@@ -61,7 +67,6 @@
       </div>
       <div class="todo__body">
         <ul class="todo__list">
-
         </ul>
       </div>
     </div>

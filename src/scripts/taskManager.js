@@ -4,6 +4,7 @@ import { createDeleteButtonAll } from "./clearAll.js";
 import { ThemeSwitcher } from "./toggleSwitch.js";
 import { successMessage } from "./successMessage.js";
 const { showMessage } = successMessage();
+import { createCheckboxButton } from './checkboxButtons.js';
 
 export const taskManager = {
   init(themeSwitcher) {
@@ -11,9 +12,10 @@ export const taskManager = {
     const inputField = document.querySelector("#todoDisplay");
     const todoList = document.querySelector(".todo__list");
     const todoWindow = document.querySelector(".todo__window");
+    const todoThemeSwitchSlider = document.querySelector(".slider")
 
     const deleteButtonAll = createDeleteButtonAll(ThemeSwitcher);
-
+    
     const updateDeleteButtonAllVisibility = () => {
       if (todoList.children.length > 0) {
         if (!todoWindow.contains(deleteButtonAll))
@@ -23,13 +25,14 @@ export const taskManager = {
         todoWindow.removeChild(deleteButtonAll);
       }
     };
-
+    
     deleteButtonAll.addEventListener("click", () => {
       todoList.innerHTML = "";
       updateDeleteButtonAllVisibility();
     });
-
+    
     const addTask = (taskText) => {
+      const checkboxButton = createCheckboxButton("taskSelector", taskText)
       const newTask = document.createElement("li");
       newTask.classList.add("todo__item");
 
@@ -37,19 +40,26 @@ export const taskManager = {
       taskTextElement.textContent = taskText;
       taskTextElement.classList.add("todo__text");
 
-      const buttonGap = document.createElement("div");
-      buttonGap.classList.add("todo__gap");
+      const buttonGapFirst = document.createElement("div");
+      buttonGapFirst.classList.add("todo__gap");
+
+      
+      const buttonGapSecond = document.createElement("div");
+      buttonGapSecond.classList.add("todo__gap");
 
       const editButton = createEditButton();
       const deleteButton = createDeleteButton();
 
       editButton.addEventListener("click", () => {
+        const existingInputEdit = newTask.querySelector('.todo__edit-input')
+        if(existingInputEdit) return
+
         const inputEdit = document.createElement("input");
         inputEdit.type = "text";
         inputEdit.value = taskTextElement.textContent;
         inputEdit.classList.add("todo__edit-input");
 
-        newTask.replaceChild(inputEdit, taskTextElement);
+        buttonGapFirst.replaceChild(inputEdit, taskTextElement);
         inputEdit.focus();
 
         let isEditing = true;
@@ -61,7 +71,7 @@ export const taskManager = {
           if (newTask.contains(inputEdit)) {
             taskTextElement.textContent =
               inputEdit.value.trim() || taskTextElement.textContent;
-            newTask.replaceChild(taskTextElement, inputEdit);
+            buttonGapFirst.replaceChild(taskTextElement, inputEdit);
           }
         };
 
@@ -84,11 +94,14 @@ export const taskManager = {
       themeSwitcher.applyThemeToNewItem(deleteButtonAll);
       themeSwitcher.applyThemeToNewEdit(editButton);
       themeSwitcher.applyThemeToNewItem(newTask);
+      todoThemeSwitchSlider.setAttribute("tabindex", "0");
 
-      newTask.appendChild(taskTextElement);
-      newTask.appendChild(buttonGap);
-      buttonGap.appendChild(editButton);
-      buttonGap.appendChild(deleteButton);
+      newTask.append(buttonGapFirst);
+      newTask.appendChild(buttonGapSecond);
+      buttonGapFirst.appendChild(checkboxButton);
+      buttonGapFirst.appendChild(taskTextElement)
+      buttonGapSecond.appendChild(editButton);
+      buttonGapSecond.appendChild(deleteButton);
       showMessage("success");
 
       todoList.append(newTask);
@@ -131,3 +144,4 @@ export const taskManager = {
     updateDeleteButtonAllVisibility();
   },
 };
+
