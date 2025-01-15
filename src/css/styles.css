@@ -337,6 +337,7 @@ h4, .h4 {
   translate: -50% -50%;
   width: 1.75rem;
   aspect-ratio: 1;
+  top: 67%;
   left: 95%;
   border-radius: var(--border-radius);
   background-color: var(--color-accent);
@@ -646,9 +647,4 @@ h4, .h4 {
 .slider:focus {
   outline: 0.125rem solid var(--color-light);
   outline-offset: 0.125rem;
-}
-
-*:focus {
-  outline: 2px solid red !important; /* Красный контур для всех элементов в фокусе */
-  outline-offset: 2px; /* Сместить контур для лучшей видимости */
 }/*# sourceMappingURL=styles.css.map */

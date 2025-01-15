@@ -4,35 +4,47 @@ import { createDeleteButtonAll } from "./clearAll.js";
 import { ThemeSwitcher } from "./toggleSwitch.js";
 import { successMessage } from "./successMessage.js";
 const { showMessage } = successMessage();
-import { createCheckboxButton } from './checkboxButtons.js';
+import { createCheckboxButton } from "./checkboxButtons.js";
+import { remainingCasesTasks } from "./remainingСasesTasks.js";
 
-export const taskManager = {
+export const taskManagers = {
   init(themeSwitcher) {
     const buttonAdd = document.querySelector("#buttonAdd");
     const inputField = document.querySelector("#todoDisplay");
     const todoList = document.querySelector(".todo__list");
     const todoWindow = document.querySelector(".todo__window");
-    const todoThemeSwitchSlider = document.querySelector(".slider")
+    const todoThemeSwitchSlider = document.querySelector(".slider");
+
+    const { updateRemainingCasesTasks } = remainingCasesTasks();
+
+    const remainingTasksDisplay = document.createElement("div");
+    remainingTasksDisplay.classList.add("remaining-tasks");
+    todoWindow.prepend(remainingTasksDisplay);
 
     const deleteButtonAll = createDeleteButtonAll(ThemeSwitcher);
-    
+
+    const updateUI = () => {
+      updateRemainingCasesTasks(todoList, remainingTasksDisplay)
+    }
+
     const updateDeleteButtonAllVisibility = () => {
       if (todoList.children.length > 0) {
         if (!todoWindow.contains(deleteButtonAll))
           todoWindow.append(deleteButtonAll);
       } else {
-        if (todoWindow.contains(deleteButtonAll));
+        if (todoWindow.contains(deleteButtonAll))
         todoWindow.removeChild(deleteButtonAll);
       }
     };
-    
+
     deleteButtonAll.addEventListener("click", () => {
       todoList.innerHTML = "";
+      updateUI()
       updateDeleteButtonAllVisibility();
     });
-    
+
     const addTask = (taskText) => {
-      const checkboxButton = createCheckboxButton("taskSelector", taskText)
+      const checkboxButton = createCheckboxButton("taskSelector", taskText);
       const newTask = document.createElement("li");
       newTask.classList.add("todo__item");
 
@@ -43,7 +55,6 @@ export const taskManager = {
       const buttonGapFirst = document.createElement("div");
       buttonGapFirst.classList.add("todo__gap");
 
-      
       const buttonGapSecond = document.createElement("div");
       buttonGapSecond.classList.add("todo__gap");
 
@@ -51,8 +62,8 @@ export const taskManager = {
       const deleteButton = createDeleteButton();
 
       editButton.addEventListener("click", () => {
-        const existingInputEdit = newTask.querySelector('.todo__edit-input')
-        if(existingInputEdit) return
+        const existingInputEdit = newTask.querySelector(".todo__edit-input");
+        if (existingInputEdit) return;
 
         const inputEdit = document.createElement("input");
         inputEdit.type = "text";
@@ -88,6 +99,7 @@ export const taskManager = {
 
       deleteButton.addEventListener("click", () => {
         newTask.remove();
+        updateUI()
         updateDeleteButtonAllVisibility();
       });
 
@@ -99,12 +111,13 @@ export const taskManager = {
       newTask.append(buttonGapFirst);
       newTask.appendChild(buttonGapSecond);
       buttonGapFirst.appendChild(checkboxButton);
-      buttonGapFirst.appendChild(taskTextElement)
+      buttonGapFirst.appendChild(taskTextElement);
       buttonGapSecond.appendChild(editButton);
       buttonGapSecond.appendChild(deleteButton);
       showMessage("success");
 
       todoList.append(newTask);
+      updateUI()
       updateDeleteButtonAllVisibility();
     };
 
@@ -142,6 +155,7 @@ export const taskManager = {
       }
     });
     updateDeleteButtonAllVisibility();
+
+      updateUI();
   },
 };
-

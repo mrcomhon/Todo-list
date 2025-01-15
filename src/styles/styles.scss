@@ -7,8 +7,3 @@
 @import "globals";
 
 @import "blocks/button", "blocks/burger-button", "blocks/checkbox", "blocks/radios", "blocks/cross-button", "blocks/button-add", "blocks/mobile-overlay", "blocks/filter", "blocks/display", "blocks/toggle-switch";
-
-*:focus {
-  outline: 2px solid red !important; /* Красный контур для всех элементов в фокусе */
-  outline-offset: 2px; /* Сместить контур для лучшей видимости */
-}
